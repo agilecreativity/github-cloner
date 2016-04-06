@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+require_relative '../lib/github_cloner'
+
+if ARGV.empty?
+  OptParser.parse(%w[--help])
+end
+
+include GithubCloner
+
+# Now we are ready to take the order
+# Show help if user forgot to type anything
+options = OptParser.parse(ARGV)
+
+# Mandatory options
+raise "base_dir is required" if options.base_dir.nil?
+raise "user is required"     if options.user.nil?
+
+# Make use of the user name
+gh_id = options.user
+
+# Note: set to specific language to limit the cloning
+if options.language
+  language = options.language #'Emacs Lisp'
+end
+
+args = {
+  base_dir:      options.base_dir,      # mandatory
+  oauth_token:   options.oauth_token,   # optional required for private repos
+  user:          options.user,          # optional if org is used?
+  org:           options.org,           # optional if user is used?
+  all_repos:     options.all_repos,     # default to false
+  group_by_user: options.group_by_user, # default to false
+  clone_repos:   options.clone_repos    # default to false
+}
+
+repos = GithubCloner::GithubUtils.list_all(args)
+
+# List of language that have been used by the given user/organization
+languages = repos.map(&:language).uniq.compact
+puts "------------------------------------------"
+puts "List of languages by #{gh_id}"
+puts languages
+puts "------------------------------------------"
+
+repos_hash = GithubCloner::GithubUtils.repos_by_language(repos, languages)
+
+result = GithubCloner::GithubUtils.repos_as_list(repos_hash)
+
+if result && !result.empty?
+  puts "------------------------------------------"
+  puts "List of all repositories by #{gh_id}"
+  result.each_with_index do |r,i|
+    puts "#{i+1}/#{result.size}: #{r}"
+  end
+  puts "------------------------------------------"
+
+  result.keep_if { |i| i.split(File::SEPARATOR)[1] == language } if language
+  GithubCloner::GithubUtils.clone_all(result,args)
+end

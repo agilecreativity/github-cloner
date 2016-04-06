@@ -1,0 +1,10 @@
+# This is the configuration used to check the rubocop source code.
+AllCops:
+  Include:
+    - Gemfile
+    - Rakefile
+    - bin/*
+    - github_cloner.gemspec
+    - lib/**/*.rb
+    - test/**/*.rb
+    - spec/**/*.rb
