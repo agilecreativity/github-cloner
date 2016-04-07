@@ -1,6 +1,7 @@
 require 'optparse'
 require 'ostruct'
 module GithubCloner
+  # See: http://ruby-doc.org/stdlib-2.3.0/libdoc/optparse/rdoc/OptionParser.html
   class OptParser
     # Return a structure describing the options.
     def self.parse(args)
@@ -8,12 +9,12 @@ module GithubCloner
       options = OpenStruct.new
 
       # Set the sensible default for the options explicitly
-      options.base_dir = "."
-      options.all_repos = false
+      options.base_dir      = "."
+      options.all_repos     = false
       options.group_by_user = false
-      options.clone_repos = false
+      options.clone_repos   = false
+      options.languages     = []
 
-      # The parser
       opt_parser = OptionParser.new do |opts|
         opts.banner = "Usage: github-cloner [options]"
 
@@ -44,17 +45,17 @@ module GithubCloner
           options.oauth_token = token
         end
 
-        opts.on("-l", "--language [LANG]",
-                "Clone only project of type LANG (optional)",
-                "where LANG is main language as shown on Github") do |lang|
-          options.language = lang
+        opts.on("-l", "--languages 'LANG1,LANG2,..,LANGn'",
+                Array,
+                "Clone all repos that in the list of languages") do |langs|
+          options.languages = langs
         end
 
         # Boolean switch.
         opts.on("-a", "--[no-]all-repos",
                 "All repository only (optional)",
-                "default to original/non-forked repositories only") do |a|
-          options.all_repos = a
+                "default to original/non-forked repositories only") do |all_repos|
+          options.all_repos = all_repos
         end
 
         opts.on("-g", "--[no-]group-by-user",
@@ -78,11 +79,20 @@ module GithubCloner
           puts ""
           puts "Example Usage:"
           puts ""
-          puts "a) List the 'JavaScript' repositories for a given user (dry-run)"
-          puts "github-cloner -b ~/Desktop/projects -u awesome_user -l JavaScript"
+          puts "1) List all repositories by a given user (dry-run)"
+          puts "$github-cloner -u awesome_user"
           puts ""
-          puts "b) Clone the 'JavaScript' repositories for a given user (note: --clone or -c option)"
-          puts "github-cloner -b ~/Desktop/projects -u awesome_user -l JavaScript -c"
+          puts "2) List all 'Emacs Lisp' repositories for a given user (dry-run)"
+          puts "$github-cloner -b ~/Desktop/projects -u awesome_user -l 'Emacs Lisp'"
+          puts ""
+          puts "3) List all 'JavaScript' and 'Emacs Lisp' repositories for a given user (dry-run)"
+          puts "$github-cloner -b ~/Desktop/projects -u awesome_user -l 'JavaScript,Emacs Lisp'"
+          puts ""
+          puts "4) Clone all 'JavaScript' and 'Emacs Lisp' repositories for a given user (note: --clone or -c option)"
+          puts "$github-cloner -b ~/Desktop/projects -u awesome_user -l 'JavaScript,Emacs Lisp' -c"
+          puts ""
+          puts "5) Clone all 'JavaScript' and 'Emacs Lisp' repositories for a given organization where a given user belongs to (include private repos)"
+          puts "$github-cloner -b ~/Desktop/projects -u awesome_user -o awesome_company -l -t GITHUB_TOKEN -l 'JavaScript,Emacs Lisp' -c"
           puts ""
           exit
         end
@@ -93,3 +103,7 @@ module GithubCloner
     end
   end
 end
+
+# options = GithubCloner::OptParser.parse(ARGV)
+# puts options
+# puts ARGV

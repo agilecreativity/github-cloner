@@ -78,10 +78,10 @@ $github-cloner --user awesome_user --oauth-token GITHUB_TOKEN_FOR_THIS_USER
 ```sh
 ## Clone all original (non-fork) public `JavaScript` repositores for user `awesome_user` to `~/Desktop/github`
 # Note: --base-dir is optional, if not specified then the current directory will be used
-#       --language must be quoted if the value include any spaces e.g. "Emacs Lisp" for this to to work properly
+#       --languages must be quoted if the value include any spaces e.g. "Emacs Lisp" for this to to work properly
 $github-cloner --user awesome_user \
                --base-dir ~/Desktop/github \
-               --language "JavaScript" \
+               --languages "JavaScript" \
                --clone
 
 ## Clone all public/private repositories for `awesome_user` which are member of `AwesomeCo` organization to `~/Desktop/github`
@@ -93,12 +93,12 @@ $github-cloner --user awesome_user \
                --oauth-token GITHUB_TOKEN_FOR_AWESOME_USER \
                --clone
 
-## Clone specific type of project (e.g. `Java` in this case) public/private repositories for `awesome_user`
+## Clone specific type of projects (e.g. `Java` and `Emacs Lisp` in this case) public/private repositories for `awesome_user`
 ## which are member of `AwesomeCo` organization to `~/Desktop/github`
 $github-cloner --user awesome_user \
                --org AwesomeCo \
                --all-repos \
-               --language "Java" \
+               --languages "Java,Emacs Lisp" \
                --base-dir ~/Desktop/github \
                --oauth-token GITHUB_TOKEN_FOR_AWESOME_USER \
                --clone

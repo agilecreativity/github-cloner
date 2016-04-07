@@ -7,8 +7,6 @@ end
 
 include GithubCloner
 
-# Now we are ready to take the order
-# Show help if user forgot to type anything
 options = OptParser.parse(ARGV)
 
 # Mandatory options
@@ -18,31 +16,30 @@ raise "user is required"     if options.user.nil?
 # Make use of the user name
 gh_id = options.user
 
-# Note: set to specific language to limit the cloning
-if options.language
-  language = options.language #'Emacs Lisp'
+if options.languages
+  languages = options.languages
 end
 
 args = {
-  base_dir:      options.base_dir,      # mandatory
-  oauth_token:   options.oauth_token,   # optional required for private repos
-  user:          options.user,          # optional if org is used?
-  org:           options.org,           # optional if user is used?
-  all_repos:     options.all_repos,     # default to false
-  group_by_user: options.group_by_user, # default to false
-  clone_repos:   options.clone_repos    # default to false
+  base_dir:      options.base_dir,
+  oauth_token:   options.oauth_token,
+  user:          options.user,
+  org:           options.org,
+  all_repos:     options.all_repos,
+  group_by_user: options.group_by_user,
+  clone_repos:   options.clone_repos
 }
 
 repos = GithubCloner::GithubUtils.list_all(args)
 
 # List of language that have been used by the given user/organization
-languages = repos.map(&:language).uniq.compact
+repo_languages = repos.map(&:language).uniq.compact
 puts "------------------------------------------"
 puts "List of languages by #{gh_id}"
-puts languages
+puts repo_languages
 puts "------------------------------------------"
 
-repos_hash = GithubCloner::GithubUtils.repos_by_language(repos, languages)
+repos_hash = GithubCloner::GithubUtils.repos_by_language(repos, repo_languages)
 
 result = GithubCloner::GithubUtils.repos_as_list(repos_hash)
 
@@ -54,6 +51,13 @@ if result && !result.empty?
   end
   puts "------------------------------------------"
 
-  result.keep_if { |i| i.split(File::SEPARATOR)[1] == language } if language
-  GithubCloner::GithubUtils.clone_all(result,args)
+  # Need to get this from the list of language
+  if languages && !languages.empty?
+    result.keep_if do |i|
+      lang = i.split(File::SEPARATOR)[1]
+      languages.include?(lang)
+    end
+  end
+
+  GithubCloner::GithubUtils.clone_all(result, args)
 end
