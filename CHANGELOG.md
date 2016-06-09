@@ -1,5 +1,9 @@
 ### Changelogs
 
+#### 0.5.0
+
+- Allow new option -r to use config file from `~/.ssh/config`
+
 #### 0.4.0
 
 - Allow more than one languages to be cloned (new feature)

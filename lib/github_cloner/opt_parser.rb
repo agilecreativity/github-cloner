@@ -10,6 +10,7 @@ module GithubCloner
 
       # Set the sensible default for the options explicitly
       options.base_dir      = "."
+      options.repo_host     = "github.com"
       options.all_repos     = false
       options.group_by_user = false
       options.clone_repos   = false
@@ -49,6 +50,12 @@ module GithubCloner
                 Array,
                 "Clone all repos that in the list of languages") do |langs|
           options.languages = langs
+        end
+
+        opts.on("-r", "--repo-host REPO_HOST",
+                "where REPO_HOST is the repository host to be cloned from",
+                "If not specified, github.com will be used") do |host|
+          options.repo_host = host
         end
 
         # Boolean switch.
@@ -94,6 +101,10 @@ module GithubCloner
           puts "5) Clone all 'JavaScript' and 'Emacs Lisp' repositories for a given organization where a given user belongs to (include private repos)"
           puts "$github-cloner -b ~/Desktop/projects -u awesome_user -o awesome_company -l -t GITHUB_TOKEN -l 'JavaScript,Emacs Lisp' -c"
           puts ""
+          puts "6) Clone all 'JavaScript' and 'Emacs Lisp' repositories for a given organization where a given user belongs to (include private repos)"
+          puts "   Using the host configured in ~/.ssh/config file instead of the default github.com"
+          puts "$github-cloner -b ~/Desktop/projects -u awesome_user -o awesome_company -l -t GITHUB_TOKEN -l 'JavaScript,Emacs Lisp' -r github-work -c"
+          puts ""
           exit
         end
       end
@@ -104,6 +115,7 @@ module GithubCloner
   end
 end
 
+## NOTE: for testing only
 # options = GithubCloner::OptParser.parse(ARGV)
 # puts options
 # puts ARGV

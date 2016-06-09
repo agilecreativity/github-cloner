@@ -72,9 +72,11 @@ module GithubCloner
           else
             output_path = [base_path, language, org_name, repo_name].join(File::SEPARATOR)
           end
-          puts "Process #{i+1} of #{projects.size} : git clone git@github.com:#{[org_name, repo_name].join(File::SEPARATOR)}.git #{output_path}"
+
+          puts "Process #{i+1} of #{projects.size} : git clone git@#{args[:repo_host]}:#{[org_name, repo_name].join(File::SEPARATOR)}.git #{output_path}"
+
           if args[:clone_repos]
-            system("git clone git@github.com:#{[org_name, repo_name].join(File::SEPARATOR)}.git #{output_path} 2> /dev/null")
+            system("git clone git@#{args[:repo_host]}:#{[org_name, repo_name].join(File::SEPARATOR)}.git #{output_path} 2> /dev/null")
           end
         end
       end

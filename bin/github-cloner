@@ -27,7 +27,8 @@ args = {
   org:           options.org,
   all_repos:     options.all_repos,
   group_by_user: options.group_by_user,
-  clone_repos:   options.clone_repos
+  clone_repos:   options.clone_repos,
+  repo_host:     options.repo_host
 }
 
 repos = GithubCloner::GithubUtils.list_all(args)
