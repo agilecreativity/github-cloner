@@ -99,11 +99,11 @@ module GithubCloner
           puts "$github-cloner -b ~/Desktop/projects -u awesome_user -l 'JavaScript,Emacs Lisp' -c"
           puts ""
           puts "5) Clone all 'JavaScript' and 'Emacs Lisp' repositories for a given organization where a given user belongs to (include private repos)"
-          puts "$github-cloner -b ~/Desktop/projects -u awesome_user -o awesome_company -l -t GITHUB_TOKEN -l 'JavaScript,Emacs Lisp' -c"
+          puts "$github-cloner -b ~/Desktop/projects -u awesome_user -o awesome_company -t GITHUB_TOKEN -l 'JavaScript,Emacs Lisp' -c"
           puts ""
           puts "6) Clone all 'JavaScript' and 'Emacs Lisp' repositories for a given organization where a given user belongs to (include private repos)"
           puts "   Using the host configured in ~/.ssh/config file instead of the default github.com"
-          puts "$github-cloner -b ~/Desktop/projects -u awesome_user -o awesome_company -l -t GITHUB_TOKEN -l 'JavaScript,Emacs Lisp' -r github-work -c"
+          puts "$github-cloner -b ~/Desktop/projects -u awesome_user -o awesome_company -t GITHUB_TOKEN -l 'JavaScript,Emacs Lisp' -r github-work -c"
           puts ""
           exit
         end
