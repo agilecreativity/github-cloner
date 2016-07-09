@@ -5,6 +5,14 @@ This change log follows the conventions of [keepachangelog.com](http://keepachan
 
 ## [Unreleased]
 
+- N/A
+
+## 0.5.2 - 2016-07-08
+
+### Fixed
+
+- Add the missing required 'fileutils'
+
 ### Added
 
 - Update the changelogs

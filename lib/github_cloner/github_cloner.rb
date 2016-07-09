@@ -1,3 +1,4 @@
+require 'fileutils'
 module GithubCloner
   class GithubUtils
     class << self
