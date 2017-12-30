@@ -26,19 +26,14 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
-
-  spec.add_runtime_dependency 'github_api', '~> 0.13'
-
-  spec.add_development_dependency 'awesome_print', '~> 1.6'
-  spec.add_development_dependency 'bundler', '~> 1.10'
-  spec.add_development_dependency 'gem-ctags', '~> 1.0'
-  #spec.add_development_dependency 'guard', '~> 2.12'
-  #spec.add_development_dependency 'guard-minitest', '~> 2.4'
-  spec.add_development_dependency 'minitest', '~> 5.6'
+  spec.add_runtime_dependency 'github_api', '~> 0.18'
+  spec.add_development_dependency 'awesome_print', '~> 1.8'
+  spec.add_development_dependency 'bundler', '~> 1.16'
+  spec.add_development_dependency 'minitest', '~> 5.10'
   spec.add_development_dependency 'minitest-spec-context', '~> 0.0'
-  spec.add_development_dependency 'pry', '~> 0.10'
-  spec.add_development_dependency 'pry-byebug', '~> 3.1' if RUBY_VERSION >= '2.0.0'
+  spec.add_development_dependency 'pry', '~> 0.11'
+  spec.add_development_dependency 'pry-byebug', '~> 3.5'
   spec.add_development_dependency 'rake', '~> 10.4'
-  spec.add_development_dependency 'rubocop', '~> 0.31'
-  spec.add_development_dependency 'yard', '~> 0.8'
+  spec.add_development_dependency 'rubocop', '~> 0.52'
+  spec.add_development_dependency 'yard', '~> 0.9'
 end
