@@ -6,7 +6,7 @@ Rake::TestTask.new do |t|
   t.test_files = FileList["test/lib/#{project_name}/test_*.rb"]
   t.verbose = true
 end
-task default: [:test, :rubocop]
+task default: [:test]
 task :pry do
   require 'pry'
   require 'awesome_print'

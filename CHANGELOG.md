@@ -7,6 +7,12 @@ This change log follows the conventions of [keepachangelog.com](http://keepachan
 
 - N/A
 
+## 0.6.0 - 2017-12-30
+
+- Update gem dependencies
+- Clone the repositories to the same base directory
+- Remove some unused dependencies
+
 ## 0.5.3 - 2016-10-30
 
 - Remove the `guard` related gems to lower the requirement for `ruby_dep`

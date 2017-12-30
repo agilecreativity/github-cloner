@@ -12,7 +12,7 @@ module GithubCloner
       options.base_dir      = "."
       options.repo_host     = "github.com"
       options.all_repos     = false
-      options.group_by_user = false
+      # options.group_by_user = false
       options.clone_repos   = false
       options.languages     = []
 
@@ -65,11 +65,11 @@ module GithubCloner
           options.all_repos = all_repos
         end
 
-        opts.on("-g", "--[no-]group-by-user",
-                "Group the output by {BASE_DIR}/{USER}/{LANG}",
-                "default to {BASE_DIR}/{LANG}/{USER}") do |gbu|
-          options.group_by_user = gbu
-        end
+        # opts.on("-g", "--[no-]group-by-user",
+        #         "Group the output by {BASE_DIR}/{USER}/{LANG}",
+        #         "default to {BASE_DIR}/{LANG}/{USER}") do |gbu|
+        #   options.group_by_user = gbu
+        # end
 
         opts.on( "-c", "--[no-]clone",
                 "Clone the repositories to the path specified (optional)",

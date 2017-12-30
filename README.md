@@ -47,8 +47,6 @@ Specific options:
                                      where LANG is main language as shown on Github
     -a, --[no-]all-repos             All repository only (optional)
                                      default to original/non-forked repositories only
-    -g, --[no-]group-by-user         Group the output by {BASE_DIR}/{USER}/{LANG}
-                                     default to {BASE_DIR}/{LANG}/{USER}
     -c, --[no-]clone                 Clone the repositories to the path specified (optional)
                                      default to --no-clone e.g. dry-run only
 
@@ -175,8 +173,8 @@ Process 1 of 1 : git clone git@github.com:littlebee/got.git /Users/bchoomnuan/De
 
 ### TODO
 
-- Replace system call with the ruby library like [grit](https://github.com/mojombo/grit) or something similar
-- Allow the `https` when performing the clone
+- [ ] Replace system call with the ruby library like [grit](https://github.com/mojombo/grit) or something similar
+- [ ] Allow the `https` when performing the clone
 
 ### Related Projects
 

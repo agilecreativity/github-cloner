@@ -68,11 +68,8 @@ module GithubCloner
           # Note: need to cleanup the language like 'Emacs Lisp' to 'Emacs_Lisp' or 'emacs_lisp'
           language = FilenameCleaner.sanitize(language, '_', false)
 
-          if args[:group_by_user]
-            output_path = [base_path, org_name, language, repo_name].join(File::SEPARATOR)
-          else
-            output_path = [base_path, language, org_name, repo_name].join(File::SEPARATOR)
-          end
+          # Simplify this to one directory for a given organization/username
+          output_path = [base_path, org_name, repo_name].join(File::SEPARATOR)
 
           puts "Process #{i+1} of #{projects.size} : git clone git@#{args[:repo_host]}:#{[org_name, repo_name].join(File::SEPARATOR)}.git #{output_path}"
 
