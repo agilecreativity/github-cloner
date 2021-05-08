@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
     e.g.$github-cloner --base-dir ~/projects --user awesome_dev --language "Emacs Lisp" --clone
     ).gsub(/^\s+/, " ")
   spec.homepage      = 'https://github.com/agilecreativity/github-cloner'
-  spec.required_ruby_version = ">= 2.0.0"
+  spec.required_ruby_version = ">= 3.0.0"
   spec.license       = 'MIT'
   spec.files         = Dir.glob('{bin,lib,spec,test}/**/*') + %w(Gemfile
                                                                  Rakefile
@@ -26,14 +26,14 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
-  spec.add_runtime_dependency 'github_api', '~> 0.18'
-  spec.add_development_dependency 'awesome_print', '~> 1.8'
-  spec.add_development_dependency 'bundler', '~> 1.16'
-  spec.add_development_dependency 'minitest', '~> 5.10'
+  spec.add_runtime_dependency 'github_api', '~> 0.19'
+  spec.add_development_dependency 'awesome_print', '~> 1.9'
+  spec.add_development_dependency 'bundler', '~> 2.2'
+  spec.add_development_dependency 'minitest', '~> 5.14'
   spec.add_development_dependency 'minitest-spec-context', '~> 0.0'
-  spec.add_development_dependency 'pry', '~> 0.11'
-  spec.add_development_dependency 'pry-byebug', '~> 3.5'
-  spec.add_development_dependency 'rake', '~> 10.4'
-  spec.add_development_dependency 'rubocop', '~> 0.53'
+  spec.add_development_dependency 'pry', '~> 0.14'
+  spec.add_development_dependency 'pry-byebug', '~> 3.8'
+  spec.add_development_dependency 'rake', '~> 10.5'
+  spec.add_development_dependency 'rubocop', '~> 0.93'
   spec.add_development_dependency 'yard', '~> 0.9'
 end
